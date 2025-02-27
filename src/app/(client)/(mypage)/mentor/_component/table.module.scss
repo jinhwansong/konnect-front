@@ -1,0 +1,43 @@
+@import '@/styles/_functions.scss';
+.table_wrapper{
+min-height: size(550px);
+}
+.table{
+    margin-bottom: size(30px);
+    border-top: var(--border-main);
+    border-bottom: var(--border-main);
+    table-layout: fixed;
+    width: 100%;
+     th{
+        background: var(--bg-f7f7f7);
+     }
+    td, th{
+        font-size: size(14px);
+        
+        border-top: var(--border-main);
+        padding: size(16px);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;;
+        &:nth-child(1){width:8%;}
+        &:nth-child(2){width:auto; }
+        &:nth-child(3){width:15%}
+        &:nth-child(4){width:15%}
+        &:nth-child(5){width:10%}
+        &:nth-child(6){width:10%}
+        &:nth-child(7){width:15%}
+    }
+    td{
+        color: var(--text-subTitle);
+    }
+
+}
+.schedule_table td,.schedule_table th{
+    &:nth-child(5){width:25%}
+    &:nth-child(6){width:18%}
+    &:nth-child(7){width:10%}
+}
+.click{
+    cursor: pointer;
+}

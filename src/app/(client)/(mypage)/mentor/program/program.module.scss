@@ -1,0 +1,36 @@
+@import '@/styles/_mixins.module.scss';
+@import '@/styles/_functions.scss';
+.management_section{
+     @include flex;
+}
+.management_title {
+    @include title;
+}
+.management_mid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: size(30px);
+
+}
+.management_search{
+    position: relative;
+    > label{
+        position: absolute;
+        right: size(10px);
+        top:0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        >svg{
+            font-size: size(18px);
+        }
+    }
+}
+.card{
+    display: flex;
+    gap: size(20px);
+    flex-wrap: wrap;
+}

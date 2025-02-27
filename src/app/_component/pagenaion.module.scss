@@ -1,0 +1,29 @@
+@import '@/styles/_functions.scss';
+
+.pagenation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: size(20px);
+    > button{
+        background: var(--bg-f7f7f7);
+        width: size(35px);
+        height: size(35px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        &.active{
+            background: var(--major-main);
+            color: var(--text-white);
+        }
+        &:first-child,&:last-child{
+            background: var(--bg-none);
+        }
+        &:hover{
+            background: var(--major-main);
+            color: var(--text-white);
+        }
+    }
+}

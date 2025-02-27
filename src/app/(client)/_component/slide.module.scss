@@ -1,0 +1,77 @@
+@import '@/styles/_functions.scss';
+@mixin button{
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.article{
+    position:relative;
+    border-radius: size(10px);
+    overflow: hidden;
+}
+.navi{
+    position: absolute;
+    padding-inline: size(10px);
+    font-size: 0;
+    z-index: 4;
+    > svg{
+        font-size: size(40px);
+        color: var(--bg-main);
+    }
+}
+.left_button{
+    @include button;
+    left: 0;
+}
+.right_button{
+    @include button;
+    right: 0;
+}
+.swiper{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.swiperImg > svg{
+     object-fit: cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+}
+.swiperText{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: size(120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > em{
+        display: block;
+        line-height: 1.3;
+        font-size:size(32px);
+        font-weight: 700;
+        color: var(--text-white);
+
+    }
+    > p{
+        display: block;
+        line-height: 1;
+        font-size: 1size;
+        margin-top:size(40px);
+        font-weight: 500;
+        color: var(--text-white);
+    }
+    > span{
+        display: block;
+        line-height: 1;
+        font-size: size(14px);
+        font-weight: 500;
+        margin-bottom: size(10px);
+        color: var(--major-main);
+    }
+}

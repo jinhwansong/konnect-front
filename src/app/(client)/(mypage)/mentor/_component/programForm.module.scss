@@ -1,0 +1,67 @@
+@import '@/styles/_mixins.module.scss';
+@import '@/styles/_functions.scss';
+.add_section{
+     @include flex;
+}
+.add_title {
+    @include title;
+}
+.add_article{
+    margin-top: size(30px);
+    display: flex;
+    flex-direction: column;
+    gap: size(15px);
+    > label{
+        font-size: size(16px);
+        font-weight: 600;
+    }
+    > label em{
+        color: var(--text-subTitle);
+        font-weight: 400;
+       font-size: size(14px);
+    }
+    > label span{
+        color: var(--text-red);
+    }
+}
+.button_wrap{
+    margin-top: size(20px);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: size(10px);
+}
+.time_table{
+    border-radius: 10px;
+    border: var(--border-main);
+    
+    table{
+        table-layout: fixed;
+        width: 100%;
+    }
+    tbody tr td{
+        font-size: size(14px);
+        text-align: right;
+        border-right: var(--border-main);
+        button{
+            width: 100%;
+            height: 33px;
+            &.active{
+                background: var(--major-main);
+            }
+        }
+        &:first-child{
+            padding: 10px;
+        }
+        &:last-child{
+            border-right: none;
+        }
+    }
+    
+    thead tr th {
+        font-size: size(14px);
+        padding: 10px;
+        border-bottom: var(--border-main);
+        width: calc(100% / 8 );
+    }
+}

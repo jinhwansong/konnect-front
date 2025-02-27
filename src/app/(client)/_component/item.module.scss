@@ -1,0 +1,76 @@
+@import '@/styles/_mixins.module.scss';
+@import '@/styles/_functions.scss';
+
+.mentoring_wrap{
+    display: grid;
+    gap: size(22px);
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 30px;
+    > a{
+        display: flex;
+        gap: 15px;
+    }
+}
+
+.imgbox{
+    position: relative;
+    width: size(165px);
+    height: size(210px);
+    @include img;
+    > div{
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        bottom: 15px;
+        text-align: center;
+        color: var(--text-white);
+        font-size: size(14px);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+.textbox{
+    flex: 1;
+    padding-block: 10px;
+    
+}
+.textbox_top {
+    > p, > span{
+        color: var(--text-subTitle);
+        font-size: size(12px);
+    }
+    .text{
+        margin-block-end: 8px;
+        line-height: 1;
+        color: var(--text-subTitle);
+        font-size: size(14px);
+        font-weight: 500;
+        > span {
+            color: var(--text-9094A8);
+            
+        }
+    }
+    > em{
+        word-break: keep-all;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;  /* 보여줄 줄 수 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: size(14px);
+        margin-block: 10px 5px;
+        font-weight: 600;
+        line-height:1.4;
+        text-overflow: ellipsis;
+    }
+    > span{
+        margin-top:10px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        >  svg{
+            color: #FFCA0E;
+        }
+    }
+}

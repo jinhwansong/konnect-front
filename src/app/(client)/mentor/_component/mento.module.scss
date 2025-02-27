@@ -1,0 +1,47 @@
+.mentor_wrap{
+    width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1.25rem;
+}
+.title{
+    font-size:1.25rem;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+    margin-bottom: 1.25rem;
+    > span{
+        color: var(--major-main);
+    }
+}
+.form {
+    width: 100%;
+    > div{
+    margin-bottom:1.25rem;
+}
+}
+.label{
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    display: block;
+    > span{
+        color: var(--text-red);
+    }
+}
+.textarea{
+    width: 100%;
+    height: 6.25rem;
+    border-radius: 5px;
+    border: var(--border-main);
+    font-size: 0.875rem;
+    padding: 0.9375rem;
+    letter-spacing: -0.3px;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    resize: none;
+    outline: none;
+    &:focus{
+         border:var(--border-major);
+    }
+}

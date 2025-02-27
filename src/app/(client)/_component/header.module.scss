@@ -1,0 +1,139 @@
+@import '@/styles/_functions.scss';
+.header{
+    width: 100%;
+    border-bottom: var(--border-main);
+}
+.header_inner{
+    max-width: size(1100px);
+    margin: 0 auto;
+    padding-block: size(15px) size(10px);
+}
+.header_top{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: size(15px);
+    > a:first-child{
+        flex: 1;
+    }
+}
+.header_link{
+    display: flex;
+    gap:  size(10px);
+    > a{
+        font-size: size(14px);
+        font-weight: 500;
+        display: block;
+        text-align: center;
+        padding: size(10px);
+        border-radius:  size(5px);
+        &:hover{
+            background: var(--bg-F1F4F6);
+        }
+    }
+    > a:last-child{
+        border:var(--border-major);
+        color: var(--major-main);
+        padding: size(10px) size(15px);
+        &:hover{
+            background: var(--major-main);
+            color:var(--text-white);
+        }
+    }
+}
+.header_Btm{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_nav{
+    display: flex;
+    gap: size(50px);
+    > a{
+        font-size: 1size;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: size(10px);
+        >svg{
+            font-size: size(18px);
+        }
+    }
+}
+.header_search{
+    position: relative;
+    > label{
+        position: absolute;
+        right:size(10px);
+        top:0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        >svg{
+            font-size: size(18px);
+        }
+    }
+}
+.profile{
+    position: relative;
+}
+.profileImg{
+    border-radius: size(35px);
+    overflow: hidden;
+    font-size: 0;
+    > div{
+        width:size(35px);
+        height: size(35px);
+    }
+}
+.profile_tap {
+  position: absolute;
+  width: size(200px);
+  border-radius: size(5px);
+  background: var(--bg-main);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 4.6px;
+  right: 0;
+  top: size(40px);
+  z-index: 99;
+  overflow: hidden;
+
+  > div {
+    padding-block: size(10px);
+    border-bottom: var(--border-main);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:first-child {
+      padding: size(15px) size(20px);
+    }
+
+    em {
+      font-weight: 600;
+    }
+
+    p {
+      font-size: size(12px);
+      font-weight: 500;
+      color: var(--text-subTitle);
+      margin-top: size(5px);
+    }
+
+    a, button {
+      display: block;
+      text-align: left;
+      font-size: size(14px);
+      font-weight: 500;
+      padding: size(10px) size(20px);
+      width: 100%;
+      
+      &:hover {
+        background: var(--bg-FCDAD3);
+        color: var(--major-main);
+      }
+    }
+  }
+}

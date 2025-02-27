@@ -1,0 +1,27 @@
+@import '@/styles/_functions.scss';
+@mixin main {
+    width: min(1100px, 100% - 30px);
+    margin: 0 auto;
+    padding-block: size(40px) size(80px);
+}
+.container {
+    @include main;
+}
+.mypage{
+    display: flex;
+    gap: 3.125rem;
+    @include main;
+}
+.nonepadding{
+    width: 100%;
+    padding-block: size(0px) size(80px);
+}
+.main_article{
+    margin-top: size(70px);
+}
+.title{
+    font-size: size(25px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: size(30px);
+}

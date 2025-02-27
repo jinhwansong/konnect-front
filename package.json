@@ -1,0 +1,60 @@
+{
+  "name": "coffee",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "mock": "npx tsx watch ./src/mocks/http.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.51.18",
+    "@tanstack/react-query-devtools": "^5.51.18",
+    "@tanstack/react-query-next-experimental": "^5.51.18",
+    "@tiptap/extension-color": "^2.11.2",
+    "@tiptap/extension-image": "^2.11.2",
+    "@tiptap/extension-link": "^2.11.2",
+    "@tiptap/extension-text-style": "^2.11.2",
+    "@tiptap/pm": "^2.11.2",
+    "@tiptap/react": "^2.11.2",
+    "@tiptap/starter-kit": "^2.11.2",
+    "@tosspayments/payment-sdk": "^1.9.1",
+    "@tosspayments/tosspayments-sdk": "^2.3.4",
+    "cookie": "^1.0.1",
+    "dompurify": "^3.2.4",
+    "firebase": "^11.3.1",
+    "jsdom": "^26.0.0",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-calendar": "^5.1.0",
+    "react-dom": "^18",
+    "react-icons": "^5.2.1",
+    "react-virtualized-auto-sizer": "^1.0.24",
+    "react-window": "^1.8.10",
+    "react-window-infinite-loader": "^1.0.9",
+    "sass": "^1.77.8",
+    "swiper": "^11.1.9",
+    "tiptap-markdown": "^0.8.10",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-virtualized-auto-sizer": "^1.0.4",
+    "@types/react-window": "^1.8.8",
+    "@types/react-window-infinite-loader": "^1.0.9",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+@import '@/styles/_functions.scss';
+.social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > hr {
+    position: relative;
+    bottom: -8px;
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    background: var(--bg-ddd);
+    border: none;
+  }
+
+  > span {
+    position: relative;
+    padding: 0 8px;
+    margin-bottom: size(16px);
+    font-size: size(12px);
+    background: var(--bg-main);
+  }
+}
+
+.social_btn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: size(16px);
+
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: size(50px);
+    border-radius: size(5px);
+    font-size: size(14px);
+    font-weight: 700;
+  }
+}
+
+// 소셜 버튼 변형
+.social_kakao {
+  background: #FAE500;
+}
+
+.social_naver {
+  background: #1EC800;
+  color: #fff;
+}
+
+.social_google {
+  background: #f8f8f8;
+}

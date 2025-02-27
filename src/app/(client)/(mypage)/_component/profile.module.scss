@@ -1,0 +1,17 @@
+@import '@/styles/_mixins.module.scss';
+@import '@/styles/_functions.scss';
+.mypage_section{
+     @include flex;
+}
+.mypage_aticle{
+    width: 100%;
+    border-radius: 10px;
+    border: var(--border-main);
+    padding: size(20px) size(30px);
+    &:first-child{
+        margin-bottom: size(15px);
+    }
+}
+.mypage_title {
+    @include title;
+}

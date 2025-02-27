@@ -1,0 +1,73 @@
+@import '@/styles/_mixins.module.scss';
+@import '@/styles/_functions.scss';
+
+.schedule_section{
+     @include flex;
+     display: flex;
+     flex-direction: column;
+     gap: 50px;
+}
+.schedule_title {
+    @include title;
+}
+.schedule > em{
+        font-size: 18px;
+        font-weight: 700;
+        display: block;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        border-bottom: var(--border-main);
+   }
+.content{
+    display: grid;
+    grid-template-columns: 150px 1fr; // 이미지 너비에 맞춤
+    gap: 50px;
+    align-items: center;
+}
+.imgbox{
+    width: 150px;
+    height: 150px;
+    @include img;
+}
+.textbox{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 30px;
+    > li em{
+        font-size: 14px;
+        display: block;
+        margin-bottom: 8px;
+         color: var(--text-subTitle);
+    }
+    > li p{
+        font-weight: 500;
+        font-size: 14px;
+       
+    }
+}
+.message{
+    margin-top: 20px;
+    font-size: 14px;
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: block;
+}
+.textbox2{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    > li em{
+        font-size: 14px;
+        display: block;
+        margin-bottom: 8px;
+         color: var(--text-subTitle);
+    }
+    > li p{
+        font-weight: 500;
+        font-size: 14px;
+       
+    }
+}

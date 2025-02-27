@@ -1,0 +1,70 @@
+@import '@/styles/_functions.scss';
+@import '@/styles/_mixins.module.scss';
+
+@mixin flex {
+    display: flex;
+    flex: 1;
+}
+
+.info_item{
+    display: flex;
+    margin-top: size(10px);
+}
+.item_title{
+    @include item_title;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.item_title_on{
+    @include item_title;
+    line-height:size(50px);
+}
+.item_right{
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.item_on{
+    flex-direction: column;
+    @include flex;
+}
+.item_text{
+    font-size: size(14px);
+    font-weight: 600;
+}
+.no_text{
+    font-size: size(14px);
+    color: var(--text-subTitle);
+}
+.no_texts{
+    font-size: size(14px);
+    color: var(--text-subTitle);
+    display: flex
+;
+    align-items: center;
+    height: 40px;
+}
+.button_wrap{
+    margin-top: size(10px);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: size(10px);
+}
+
+.error{
+    color: var(--text-red);
+    font-size:size(12px);
+    font-weight: 500;
+}
+.editor_text{
+    flex: 1;
+    word-break: break-all;
+}
+.editor_button{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}

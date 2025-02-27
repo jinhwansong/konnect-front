@@ -1,0 +1,61 @@
+.html :global(ul),
+.html :global(ol) {
+    padding-left: 1.5em;
+   margin: 0.5em 0;
+   list-style: revert !important;
+}
+.html :global(li) {
+    list-style: revert !important;
+}
+.html :global(hr) {
+    border: none;
+   border-top: 2px solid #ced4da;
+   margin: 1em 0;
+}
+
+.html :global(img) {
+    border: none;
+   border-top: 2px solid #ced4da;
+   margin: 1em 0;
+}
+.html :global(p) {
+    margin: 0.5em 0;
+}
+.html :global(strong) {
+    font-weight: bold;
+}
+.html :global(em) {
+    font-style: italic !important;
+}
+.html :global(s) {
+    text-decoration: line-through;
+}
+.html :global(code) {
+    background: #25262B;
+   padding: 0.2em 0.4em;
+   border-radius: 4px;
+}
+.html :global(pre) {
+    color: #abb2bf;
+   background: #282c34;
+   border-radius: 6px;
+   
+   code {
+     display: block;
+     padding: 1rem;
+     overflow-x: auto;
+     color: #abb2bf;
+     background: #282c34;
+   }
+}
+.html :global(blockquote) {
+    margin: 1em 0;
+   padding-left: 1em;
+   border-left: 4px solid #ced4da;
+   quotes: auto !important;
+
+   &:before, 
+   &:after {
+     content: revert !important;
+   }
+}

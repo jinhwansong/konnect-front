@@ -1,0 +1,83 @@
+@import '@/styles/_functions.scss';
+@mixin size {
+    height: size(40px);
+  font-size: size(12px);
+}
+.button{
+  width: 100%;
+  font-size: size(14px);
+  height: size(50px);
+  font-weight: 500;
+  border-radius:5px;
+  background:var(--major-main);
+  color:var(--text-white);
+  &:hover {
+    background: var(--bg-E83A0D);
+  }
+  &:disabled{
+    background: var(--bg-F1F4F6);
+    color:var(--text-title);
+  }
+}
+.width80{
+  width: size(80px);
+}
+.bgborder{
+  background: var(--bg-main);
+  border: var(--border-main);
+  color: var(--text-subTitle);
+  &:hover {
+    border: var(--border-E83A0D);
+    color:var(--text-white);
+  }
+}
+.bgline{
+  background: var(--bg-main);
+  border: var(--border-main);
+  color: var(--text-subTitle);
+  &:hover{
+    background: var(--bg-main);
+  }
+}
+.widthSmall {
+  width: size(60px);
+  @include size;
+}
+.widthManage {
+  width: size(90px);
+  @include size;
+}
+.widthBig {
+  width: size(110px);
+  @include size;
+}
+.bgdelete {
+    background: #DC2626;  // 또는 #FF4500
+    color: var(--text-white);
+    &:hover {
+        background: #B91C1C;  // 더 어두운 톤
+    }
+}
+.bgnone{
+    background: var(--bg-6B7280);
+    color: var(--text-white);
+    &:hover{
+        background: var(--bg-4B5563);
+    }
+}
+.bgborder2{
+  border: var(--border-major);
+  color: var(--major-main);
+  background: none;
+  &:hover {
+    background: none;
+  }
+}
+.width4 {
+  flex: 4;
+  height: size(45px);
+}
+.width6 {
+  flex: 6;
+  height: size(45px);
+}

@@ -1,0 +1,45 @@
+.article{
+    width: 23.75rem;
+    margin: 0 auto;
+    padding-block: 1.25rem;
+}
+
+.title{
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+.form{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    > a{
+        text-align: right;
+        display: block;
+        margin-bottom: 1.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-subTitle);
+    }
+    > p{
+        color: var(--text-red);
+        font-size:0.75rem;
+        font-weight: 500;
+    }
+}
+.signup{
+    display: flex;
+    justify-content: center;
+    margin-block: 1.25rem 1.875rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    >a{
+        border-right: 1px solid #ddd;
+        padding: 0 1rem;
+    }
+    >a:last-child{
+        border:none
+    }
+   
+}

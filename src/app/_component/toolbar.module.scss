@@ -1,0 +1,237 @@
+@import '@/styles/_mixins.module.scss';
+
+.editor_wrap {
+ border: var(--border-main);
+ border-radius: 10px;
+ 
+ > div:last-child{
+  min-height: 400px;
+  
+  
+  > div{
+    outline: none;
+    min-height: calc(400px - 1rem);
+    word-break: break-all;
+  }
+ }
+}
+
+
+.toolbar {
+ display: flex;
+ align-items: center;
+ gap: 0.5rem;
+ padding: 0.5rem;
+ border-bottom: var(--border-main);
+}
+
+
+.itemBox {
+ display: flex;
+ gap: 0.5rem;
+
+ button,
+ .imageUpload {
+   min-width: 2.5rem;
+   height: 2.5rem;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0.5rem;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: all 0.2s ease;
+   font-size: 0.875rem;
+
+   svg {
+     width: 1.25rem;
+     height: 1.25rem;
+   }
+
+   &:hover {
+     background: #C1C2C5;
+   }
+
+   &:active {
+     transform: translateY(1px);
+     background: #25262B;
+     color: #fff;
+   }
+ }
+}
+
+
+.active {
+ background: #25262B !important;
+ color: #fff !important;
+}
+
+.line {
+ width: 1px;
+ height: 24px;
+ background: var(--bg-ddd);
+ margin: 0 0.25rem;
+}
+
+.colorPickerContainer {
+  position: relative;
+  display: inline-block;
+
+  // 메인 컬러피커 버튼
+  > button {
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #C1C2C5;
+    }
+
+    &.active {
+      background: #25262B;
+      color: #fff;
+    }
+  }
+}
+
+.colorPalette {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-top: 0.5rem;
+
+  // 컬러 선택 버튼
+  button {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.25rem;
+    border: none;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+
+    // 선택된 색상 버튼
+    &.activeColor {
+      background: #e9ecef;
+    }
+  }
+}
+
+.colorSwatch {
+ width: 100%;
+ height: 100%;
+ border-radius: 4px;
+ border: 1px solid #dee2e6;
+}
+
+
+.editor_wrap :global(.ProseMirror) {
+  max-height: 400px;
+  outline: none;
+  @include scroll;
+  padding: 1rem 2rem;
+  p {
+    margin: 0.5em 0;
+  }
+
+ strong {
+   font-weight: bold;
+ }
+
+ em {
+   font-style: italic !important;
+ }
+
+ s {
+   text-decoration: line-through;
+ }
+
+ code {
+   background: #25262B;
+   padding: 0.2em 0.4em;
+   border-radius: 4px;
+ }
+
+ pre {
+   color: #abb2bf;
+   background: #282c34;
+   border-radius: 6px;
+   
+   code {
+     display: block;
+     padding: 1rem;
+     overflow-x: auto;
+     color: #abb2bf;
+     background: #282c34;
+   }
+ }
+
+ blockquote {
+   margin: 1em 0;
+   padding-left: 1em;
+   border-left: 4px solid #ced4da;
+   quotes: auto !important;
+
+   &:before, 
+   &:after {
+     content: revert !important;
+   }
+ }
+
+ ul, ol {
+   padding-left: 1.5em;
+   margin: 0.5em 0;
+   list-style: revert !important;
+ }
+
+ li {
+   list-style: revert !important;
+ }
+
+ hr {
+   border: none;
+   border-top: 2px solid #ced4da;
+   margin: 1em 0;
+ }
+
+ img {
+   max-width: 100%;
+   height: auto;
+   border-radius: 4px;
+ }
+  }
+  
+
+@media (max-width: 768px) {
+ .toolbar {
+   flex-wrap: wrap;
+   gap: 0.75rem;
+ }
+
+ .line {
+   display: none;
+ }
+
+ .itemBox {
+   flex-wrap: wrap;
+ }
+}

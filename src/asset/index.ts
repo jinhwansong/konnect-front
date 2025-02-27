@@ -1,0 +1,13 @@
+export { default as IcLogo } from './logo.svg';
+export { default as IcMainSlide01 } from './mainslide01.svg';
+export { default as IcMainSlide02 } from './mainslide02.svg';
+export { default as IcGoogle } from './google.svg';
+export { default as IcKakao } from './kakao.svg';
+export { default as IcNaver } from './naver.svg';
+export { default as IcProfile } from './thumb_profile.jpg';
+export { default as IcNetwork } from './network.png';
+export { default as IcRate } from './rate.png';
+export { default as IcInfo } from './info.png';
+export { default as IcShare } from './share.png';
+export { default as IcSuccess } from './success.png';
+export { default as IcMentorbg } from './mentobg.svg';

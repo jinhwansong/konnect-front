@@ -1,0 +1,205 @@
+@import '@/styles/_mixins.module.scss';
+
+.apply_wrap{
+    width: 500px;
+    margin: 0 auto;
+    height: 700px;
+    box-sizing: border-box;
+    padding: 1.25rem;
+    overflow: hidden;
+}
+.title{
+    font-size: 1.125rem;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+    margin-bottom: 1.25rem;
+    > span{
+        color: var(--text-subTitle);
+        font-size: 0.875rem;
+        margin-left: 5px;
+        font-weight: 400;
+    }
+}
+.apply_form{
+    width: 100%;
+    @include scroll;
+    height: calc(100% - 90px);
+    > div {
+        margin-top:1.25rem;
+        &:first-child{
+            margin-top: 0
+        }
+    };
+}
+.label{
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    display: block;
+    > span{
+        color: var(--text-red);
+    }
+}
+.textarea{
+    width: 100%;
+    height: 6.25rem;
+    border-radius: 5px;
+    border: var(--border-main);
+    font-size: 0.875rem;
+    padding: 0.9375rem;
+    letter-spacing: -0.3px;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    resize: none;
+    outline: none;
+    &:focus{
+         border:var(--border-major);
+    }
+}
+.error{
+    margin-top: 0.625rem;
+    color: var(--text-red);
+    font-size:0.75rem;
+    font-weight: 500;
+}
+.seleted_days{
+    width: 100%;
+    border-radius: 5px;
+    border: var(--border-main);
+    letter-spacing: -0.3px;
+    text-align: left;
+    height: 3.125rem;
+    padding-inline: 1rem;
+}
+.calendar{
+    margin-top: 5px;
+    border:var(--border-main);
+    border-radius:5px;
+    padding: 20px 10px;
+    [class*="react-calendar__navigation"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+        padding-inline: 10px;
+        > button{
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+    [class*="react-calendar__viewContainer"] {
+        margin-block: 20px 5px;
+        text-align: center;
+        font-size: 12px;
+    }
+    [class*="react-calendar__month-view__weekdays"]{
+        height: 22px;
+        line-height: 22px;
+        > div:first-child abbr{
+            color: var(--text-red);
+        }
+        > div:last-child abbr{
+            color: #034EA1;
+        }
+        div abbr {
+            text-decoration: none;
+            font-weight: 500;
+        }
+    }
+    [class*="react-calendar__month-view__days"] > button{
+        padding: 5px;
+        width: 100%;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        &:hover{
+            border: var(--border-major);
+            color: var(--major-main);
+        }
+        &:disabled{
+            color: var(--text-adb5bd);
+            &:hover{
+                border: 1px solid transparent;
+               color: var(--text-adb5bd);
+            }
+        }
+        &[class*="react-calendar__tile--active"]{
+            color: var(--text-white);
+            background: var(--major-main);
+        }
+    }
+}
+.slot_Box{
+    border: var(--border-main);
+    margin-top:10px;
+    padding: 20px;
+    
+    > span{
+        font-size:12px;
+    }
+    
+}
+.slot_button{
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+    > button{
+        border: var(--border-main);
+        font-size:14px;
+        padding: 10px;
+        > span{
+                margin-left: 5px;
+            }
+        &.reserved{
+            color: #ced4da;
+            cursor: auto;
+            
+        }
+    }
+}
+
+.button_wrap{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+.info {
+    @include scroll;
+    height: calc(100% - 146px);
+    border-bottom: var(--border-main);
+    > li{
+        display: grid;
+        margin-top: 15px;
+        grid-template-columns: 85px 1fr;
+        grid-auto-rows: -webkit-max-content;
+        grid-auto-rows: max-content;
+        font-size: 14px;
+        > em{
+            font-weight: 700;
+        }
+        > p{
+            word-break: break-all;
+            font-weight: 500;
+        }
+        &:first-child{
+            margin-top: 0;
+        }
+    }
+}
+.price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 20px;
+    
+    > p{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    >em{
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
