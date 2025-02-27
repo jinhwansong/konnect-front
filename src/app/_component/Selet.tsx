@@ -13,10 +13,7 @@ interface ISelet {
   text: string;
   onSelet: (selet: string) => void;
   width?: string;
-  changeData?: (
-    
-    value: string
-  ) => Promise<void>;
+  changeData?: (value: string) => Promise<void>;
 }
 export default function Selet({
   onPopup,

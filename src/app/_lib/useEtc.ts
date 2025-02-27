@@ -10,6 +10,13 @@ export async function fetchProgram({
   sort,
   mentoring_field,
 }: IfetchProgram) {
+   if (process.env.NODE_ENV === 'production') {
+     return {
+       items: [],
+       totalPage: 0,
+       message: '데이터를 불러올 수 없습니다.',
+     };
+   }
   try {
     const response = await fetch(
       `${
@@ -36,6 +43,13 @@ export async function fetchProgram({
   }
 }
 export async function fetchProgramDetail(id:number) {
+   if (process.env.NODE_ENV === 'production') {
+     return {
+       items: [],
+       totalPage: 0,
+       message: '데이터를 불러올 수 없습니다.',
+     };
+   }
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/programs/${id}`,
