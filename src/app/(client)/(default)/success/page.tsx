@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IcSuccess } from '@/asset';
@@ -17,19 +17,21 @@ export interface ISuccessPage {
   mentor: string;
 }
 
-export default function SuccessPage() {
+function SuccessPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [retryCount, setRetryCount] = useState(0);
   // 토스트 팝업
   const { showToast } = useToastStore((state) => state);
+
   useEffect(() => {
     // 쿼리 파라미터 값이 결제 요청할 때 보낸 데이터와 동일한지 반드시 확인하세요.
     // 클라이언트에서 결제 금액을 조작하는 행위를 방지할 수 있습니다.
-    const comfirmPayment = async () => {
+    const confirmPayment = async () => {
       const orderId = searchParams.get('orderId');
       const amount = searchParams.get('amount');
       const paymentKey = searchParams.get('paymentKey');
+
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/reservation/verify`,
@@ -46,7 +48,9 @@ export default function SuccessPage() {
             }),
           }
         );
+
         const data = await response.json();
+
         if (data.shouldRetry && retryCount < 2) {
           setTimeout(() => {
             setRetryCount((prev) => prev + 1);
@@ -54,14 +58,16 @@ export default function SuccessPage() {
           showToast('잠시만 기다려 주십시오', 'success');
           return;
         }
-        if(data.statue === 'done') {
+
+        if (data.status === 'done') {
           showToast('결제가 완료되었습니다.', 'success');
         }
       } catch (error: any) {
         showToast(error.message, 'error');
       }
     };
-    comfirmPayment();
+
+    confirmPayment();
   }, [searchParams, router, showToast, retryCount]);
 
   return (
@@ -78,5 +84,13 @@ export default function SuccessPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SuccessPageContent />
+    </Suspense>
   );
 }

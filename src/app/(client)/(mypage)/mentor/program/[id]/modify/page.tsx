@@ -2,8 +2,8 @@
 import React from 'react';
 import ProgramForm from '../../../_component/ProgramForm';
 import { useQuery } from '@tanstack/react-query';
-import { getDetailProgram } from '@/app/_lib/useEtc';
 import { useParams } from 'next/navigation';
+import { getDetailProgram } from '@/app/_lib/useMentor';
 
 
 export default function Modigy() {

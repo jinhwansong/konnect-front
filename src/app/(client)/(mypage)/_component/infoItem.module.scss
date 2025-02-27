@@ -50,7 +50,7 @@
     margin-top: size(10px);
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;;
     gap: size(10px);
 }
 
@@ -66,5 +66,5 @@
 .editor_button{
     display: flex;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;;
 }
