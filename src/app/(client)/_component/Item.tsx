@@ -13,7 +13,7 @@ export default function Item({ items }: IMentoring) {
   return (
     <div className={style.mentoring_wrap}>
       {items.length > 0 ? (
-        items?.map((item) => (
+        items?.map((item, index) => (
           <Link key={item.id} href={`/mentors/${item.id}`}>
             <div className={style.imgbox}>
               <Image
@@ -21,7 +21,9 @@ export default function Item({ items }: IMentoring) {
                 alt={item.name}
                 width={165}
                 height={210}
-                loading="lazy"
+                priority={index === 0} // 첫 번째 이미지만 priority 적용
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
               />
               <div>
                 <span>{item.company}</span>

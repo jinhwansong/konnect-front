@@ -56,21 +56,19 @@ export default function MentoringPage() {
   });
   // 미팅버튼
   const onMetting = useCallback(
-    (status: StatusType) => {
+    (status: StatusType, id:number) => {
       if (status === 'confirmed')
         return showToast('멘토 수락 후 참여 가능합니다', 'error');
-      return router.push('/');
+      return router.push(`/chat/${id}`);
     },
     [router, showToast]
   );
   // 일정변경버튼
   const onChangeDay = useCallback(
-    (status: StatusType) => {
-      if (status === 'confirmed')
-        return showToast('멘토 수락 후 변경 가능합니다', 'error');
+    () => {
       return router.push('/');
     },
-    [router, showToast]
+    [router]
   );
   // 리뷰버튼
   const [review, changeReview] = useInput('');
@@ -123,23 +121,16 @@ export default function MentoringPage() {
               </p>
             </div>
             <div className={style.mentor_right}>
-              {item.status === 'progress' ||
-                (item.status === 'confirmed' && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => onMetting(item.status)}
-                    >
-                      미팅참여
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => onChangeDay(item.status)}
-                    >
-                      일정변경
-                    </button>
-                  </>
-                ))}
+              {(item.status === 'progress' || item.status === 'confirmed') && (
+                <>
+                  <button type="button" onClick={() => onMetting(item.status, item.id)}>
+                    미팅참여
+                  </button>
+                  <button type="button" onClick={() => onChangeDay()}>
+                    일정변경
+                  </button>
+                </>
+              )}
               {item.status === 'completed' && (
                 <>
                   <button onClick={() => onReviews()}>후기작성</button>

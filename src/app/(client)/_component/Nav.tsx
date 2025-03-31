@@ -61,6 +61,9 @@ export default function Nav() {
             url.push('/mentor/create_program');
             url.push(`/mentor/program/${pathname.split('/')[3]}`);
             url.push(`/mentor/program/${pathname.split('/')[3]}/modify`);
+          } 
+          if (item.href === '/mentor/schedule') {
+            url.push(`/mentor/schedule/${pathname.split('/')[3]}`);
           }
           return (
             <li

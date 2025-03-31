@@ -3,26 +3,26 @@ import React, { useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
+import {useQueryClient } from '@tanstack/react-query';
 import { FcManager, FcHome, FcQuestions } from 'react-icons/fc';
-import { BiSearch } from 'react-icons/bi';
+import { BiBell, BiSearch } from 'react-icons/bi';
 import Input from '@/app/_component/Input';
 import { getImageUrl } from '@/util/getImageUrl';
 import usePopup from '@/hooks/usePopup';
-import useInput from '@/hooks/useInput';
 import { usePopupStore } from '@/store/usePopupStore';
-import { IcLogo } from '@/asset';
+import { IcFavicon, IcFeed, IcLogo } from '@/asset';
 import { useUserData } from '@/app/_lib/useUser';
 import { useLogout } from '@/app/_lib/useEtc';
-
 import style from './header.module.scss';
-
+import useNoti from '@/hooks/useNotification';
+import { INoti } from '@/type';
+import getTime from '@/util/getTime';
+import { BiX } from 'react-icons/bi';
 
 export default function Header() {
   const queryClient = useQueryClient();
-  const [search, changeSearch] = useInput('');
   const router = useRouter();
-  const { onPopup, popup, closePop } = usePopupStore();
+  const { onPopup, popup, closePop, onPopup4, popup4 } = usePopupStore();
   const { popupRef } = usePopup();
   // 내정보
   const { data } = useUserData();
@@ -35,6 +35,14 @@ export default function Header() {
     onPopup();
    
   }, [router, onPopup, logoutMutation, queryClient]);
+  // 알림 관련
+  const {
+    notifications,
+    onNotiRead,
+    onNotiReadAll,
+    onNotiRemove,
+    onNotiRemoveAll,
+  } = useNoti();
   return (
     <header className={style.header}>
       <div className={style.header_inner}>
@@ -43,7 +51,73 @@ export default function Header() {
             <IcLogo />
           </Link>
           <div className={style.header_link}>
+            <div className={style.button_wrap}>
+              <button
+                data-tip="알림"
+                className={style.button}
+                onClick={onPopup4}
+              >
+                <BiBell />
+                알림
+              </button>
+              {popup4 && (
+                <div className={style.popup}>
+                  {data ? (
+                    notifications.length > 0 ? (
+                      <>
+                        <div>
+                          <button onClick={() => onNotiReadAll()}>
+                            모두 읽음 ·
+                          </button>
+                          <button onClick={() => onNotiRemoveAll()}>
+                            모두 삭제
+                          </button>
+                        </div>
+                        <ul className={style.noti}>
+                          {notifications.map((noti: INoti) => (
+                            <li
+                              key={noti.id}
+                              className={noti.isRead ? style.read : ''}
+                              onClick={() => onNotiRead(noti.id, noti.isRead)}
+                            >
+                              <Image
+                                src={noti.image || IcFavicon}
+                                width={30}
+                                height={30}
+                                alt="아이콘"
+                              />
+                              <div className={style.text_box}>
+                                <p>{noti.message}</p>
+                                <span>{getTime(noti.createdAt)}</span>
+                              </div>
+                              <button onClick={() => onNotiRemove(noti.id)}>
+                                <BiX />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <div className={style.not_feed}>
+                        <IcFeed />
+                        <em>받은 알림이 없습니다.</em>
+                        <p>알림 설정에서 받고 싶은 알림을 선택하세요.</p>
+                      </div>
+                    )
+                  ) : (
+                    <div className={style.not_login}>
+                      <Link href="/login">로그인 하기</Link>
+                      <p>
+                        로그인 하시면 신청한 멘토링 또는
+                        <br /> 새로운 아티클이 올라오면 알려드립니다.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
             <Link href="/mentor">멘토지원</Link>
+
             {data ? (
               <div className={style.profile}>
                 <button
@@ -109,19 +183,6 @@ export default function Header() {
               분야별 아티클
             </Link>
           </nav>
-          <form className={style.header_search}>
-            <Input
-              type="text"
-              value={search}
-              onChange={changeSearch}
-              placeholder="관심있는 직무, 회사, 멘토를 검색해보세요"
-              name="search"
-              bg="search"
-            />
-            <label htmlFor="search">
-              <BiSearch />
-            </label>
-          </form>
         </div>
       </div>
     </header>

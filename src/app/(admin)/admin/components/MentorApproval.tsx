@@ -147,31 +147,33 @@ export default function MentorApproval() {
       </div>
       {popup && (
         <RejectModal closePop={closePop} title="멘토링 신청 거절">
-          <textarea
-            placeholder="상세한 거절 사유를 입력해주세요"
-            value={reason}
-            onChange={changeReason}
-            name="reason"
-            className={style.textarea}
-          />
-          <div className={style.button}>
-            <Button
-              type="button"
-              width="80"
-              height="40"
-              bg="none"
-              onClick={() => closePop()}
-            >
-              취소
-            </Button>
-            <Button
-              type="button"
-              width="80"
-              height="40"
-              onClick={() => onCancel()}
-            >
-              확인
-            </Button>
+          <div className={style.modal}>
+            <textarea
+              placeholder="상세한 거절 사유를 입력해주세요"
+              value={reason}
+              onChange={changeReason}
+              name="reason"
+              className={style.textarea}
+            />
+            <div className={style.button}>
+              <Button
+                type="button"
+                width="80"
+                height="40"
+                bg="none"
+                onClick={() => closePop()}
+              >
+                취소
+              </Button>
+              <Button
+                type="button"
+                width="80"
+                height="40"
+                onClick={() => onCancel()}
+              >
+                확인
+              </Button>
+            </div>
           </div>
         </RejectModal>
       )}

@@ -182,3 +182,110 @@ export const getReservation = async (page: number) => {
   }
   return data;
 };
+
+// 알림조회
+export const getNotification = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification`,
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) {
+    throw data;
+  }
+  return data;
+};
+// 알림 읽음 처리
+export const useAsRead = () => {
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification/${id}`,
+        {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
+};
+// 전체 알림 읽음 처리
+export const useAsReadAll = () => {
+  return useMutation({
+    mutationFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification`,
+        {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
+};
+// 알림 삭제 처리
+export const useAsRemove = () => {
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification/${id}`,
+        {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
+};
+// 전체 알림 삭제 처리
+export const useAsRemoveAll = () => {
+  return useMutation({
+    mutationFn: async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notification`,
+        {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
+};

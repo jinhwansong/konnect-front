@@ -11,3 +11,5 @@ export { default as IcInfo } from './info.png';
 export { default as IcShare } from './share.png';
 export { default as IcSuccess } from './success.png';
 export { default as IcMentorbg } from './mentobg.svg';
+export { default as IcFeed } from './feed.svg';
+export { default as IcFavicon } from './favicon.png';

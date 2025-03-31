@@ -79,7 +79,7 @@ function SuccessPageContent() {
         <Link href="/" className={style.home}>
           홈으로 돌아가기
         </Link>
-        <Link href="/mentoring/payments" className={style.payment}>
+        <Link href="/user/mentorings" className={style.payment}>
           멘토링 예약 확인하기
         </Link>
       </div>

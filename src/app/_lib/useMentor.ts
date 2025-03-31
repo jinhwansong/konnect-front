@@ -1,6 +1,6 @@
 'use client';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { ICreateProgram, IMentorMutation, IModifyProgram } from '@/type';
+import { ICreateProgram, IMentorApprovalParams, IMentorMutation, IModifyProgram } from '@/type';
 
 // 멘토 정보
 export const useMentor = () => {
@@ -336,4 +336,50 @@ export const getDetailSchedule = async (id: string) => {
     throw data;
   }
   return data;
+};
+export const useMentoringApproval = () => {
+  return useMutation({
+    mutationFn: async ({ approved, reason, id }: IMentorApprovalParams) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/mentoring/schedule/${id}`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            approved,
+            reason,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
+};
+export const useCreateRoom = () => {
+  return useMutation({
+    mutationFn: async ({ chatRoomId }: { chatRoomId :number}) => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/chat`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chatRoomId,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw data;
+      }
+      return data;
+    },
+  });
 };

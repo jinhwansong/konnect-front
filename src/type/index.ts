@@ -154,8 +154,6 @@ export interface ICareerItem extends IBaseField {
   seletText:string;
 }
 
-
-
 export interface IfetchProgram {
   page: number;
   limit: number;
@@ -183,3 +181,18 @@ export interface IMentoring {
 
 
 
+// ---------- 알림 서비스 타입 ---------- //
+
+// 알람 데이터
+export interface INoti {
+  id: number;
+  message: string;
+  isRead: boolean;
+  reservationId: number;
+  createdAt: string;
+  image: string;
+}
+export interface INotification {
+  items: INoti[];
+  message: string;
+}

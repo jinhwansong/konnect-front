@@ -43,6 +43,9 @@ export default function ProfileSection({
         }
         const image = new FormData();
         image.append('image', file);
+        image.append('optimize', 'true');
+        image.append('maxWidth', '196');
+        image.append('quality', '80');
         mutation.mutate(image, {
           onSuccess: (data: any) => {
             showToast(data.message, 'success');
