@@ -21,6 +21,10 @@ const nextConfig = {
             protocol: 'http',
             hostname: 'localhost',
             port: '3030',
+        }, {
+            protocol: 'https',
+            hostname: 'konee.shop',
+            port: '',
         }],
         // 이미지 최적화 설정
         deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048], // 반응형 이미지 크기
@@ -32,7 +36,7 @@ const nextConfig = {
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;", // CSP 정책
     },
     // 폰트 최적화
-    optimizeFonts: true, // 폰트 최적화 활성화
+    optimizeFonts: false, // 폰트 최적화 활성화
     
     // 성능 최적화
     reactStrictMode: true, // 개발시 문제 발견을 위한 Strict Mode
