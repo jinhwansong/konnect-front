@@ -30,6 +30,7 @@ export async function fetchProgram({
     }
 
     const data = await response.json();
+    console.log(data)
     return data;
   } catch (error) {
     throw error; // 에러를 다시 던져서 error.tsx에서 처리하도록 함

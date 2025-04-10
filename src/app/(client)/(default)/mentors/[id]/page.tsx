@@ -56,7 +56,9 @@ export default async function page({ params }: { params: { id: number } }) {
             <span>{data?.name}</span> 멘토
           </em>
           <p>
-            {data?.company} · {data?.position} · {data?.career}
+            {data?.company ? `${data.company} · ` : ''}
+            {data?.position ? `${data.position} · ` : ''}
+            {data?.career}
           </p>
           <p>
             1회 멘토링 : <strong>{formatNumber(data?.price)}</strong> 원 /{' '}

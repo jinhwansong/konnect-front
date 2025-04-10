@@ -12,7 +12,7 @@ export default function Social({ text }: ISocial) {
   const onSocial = useCallback(
     (sns: string) => {
       if (sns === 'kakao') {
-        router.push(`https://www.konee.shop/users/auth/kakao`);
+        router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/auth/kakao`);
       }
       if (sns === 'naver') {
         router.push(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/auth/naver`);

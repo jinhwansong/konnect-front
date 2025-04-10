@@ -34,12 +34,15 @@ export default function Item({ items }: IMentoring) {
               <div className={style.textbox_top}>
                 <p>{item.mentoring_field}</p>
                 <em>{item.title}</em>
-                <p className={style.text}>
-                  <span>직무</span> {item.position}
-                </p>
+                {item.position && (
+                  <p className={style.text}>
+                    <span>직무</span> {item.position}
+                  </p>
+                )}
+
                 <p className={style.text}>
                   <span>경력</span> {item.career}
-                </p>
+                </p> 
                 <span>
                   <FaStar />
                   {item.averageRating}({item.totalReviews})

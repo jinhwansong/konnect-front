@@ -60,7 +60,7 @@ export default function Header() {
                 알림
               </button>
               {popup4 && (
-                <div className={style.popup}>
+                <div className={style.popup} ref={popupRef}>
                   {data ? (
                     notifications.length > 0 ? (
                       <>
@@ -138,19 +138,43 @@ export default function Header() {
                       <p>{data.email || data.snsId}</p>
                     </div>
                     <div>
-                      <Link href="/user/mypage" onClick={closePop}>
-                        내 정보
-                      </Link>
-                      <Link href="/user/bookmarks" onClick={closePop}>
-                        북마크
-                      </Link>
-                      <Link href="/user/relationships" onClick={closePop}>
-                        팔로우
-                      </Link>
-                      <Link href="/user/mentorings" onClick={closePop}>
-                        멘토링 신청 내역
-                      </Link>
-                      <Link href="/user/payments">결제/환불 내역</Link>
+                      {data.role === 'mentee' && (
+                        <>
+                          <Link href="/user/mypage" onClick={closePop}>
+                            내 정보
+                          </Link>
+
+                          <Link href="/user/mentorings" onClick={closePop}>
+                            멘토링 신청 내역
+                          </Link>
+                          <Link href="/user/payments" onClick={closePop}>
+                            결제/환불 내역
+                          </Link>
+                          <Link href="/user/payments" onClick={closePop}>
+                            결제/환불 내역
+                          </Link>
+                        </>
+                      )}
+                      {data.role === 'mentor' && (
+                        <>
+                          <Link href="/user/mypage" onClick={closePop}>
+                            내 정보
+                          </Link>
+
+                          <Link
+                            href="/mentor/mentor_profile"
+                            onClick={closePop}
+                          >
+                            멘토 정보
+                          </Link>
+                          <Link href="/mentor/schedule" onClick={closePop}>
+                            멘토링 관리
+                          </Link>
+                          <Link href="/mentor/program" onClick={closePop}>
+                            멘토링 생성/관리
+                          </Link>
+                        </>
+                      )}
                       {data.role === 'admin' && (
                         <Link href="/admin" onClick={closePop}>
                           관리자페이지

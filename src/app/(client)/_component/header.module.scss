@@ -10,7 +10,7 @@
 }
 .header_top{
     display: flex;
-    justify-content: flex-end;
+        justify-content: space-between;
     align-items: center;
     margin-bottom: .9375rem;
     > a:first-child{
@@ -145,6 +145,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+        margin-top: 10px;
     > li {
         display: flex;
         gap: 10px;

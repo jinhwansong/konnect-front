@@ -2,7 +2,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 
-
 // 내 정보
 export const useUserData = () => {
   return useQuery({

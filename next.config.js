@@ -42,7 +42,6 @@ const nextConfig = {
     reactStrictMode: true, // 개발시 문제 발견을 위한 Strict Mode
     compress: true, // 응답 압축
     poweredByHeader: false, // 'X-Powered-By' 헤더 제거
-    
     webpack: (config, {dev, isServer}) => {
         if (dev) {
             config.cache = {
@@ -91,8 +90,6 @@ const nextConfig = {
         scrollRestoration: true, // 스크롤 위치 복원 기능
         nextScriptWorkers: true, // 스크립트 웹 워커 활성화
     },
-    
-    // 정적 자산 최적화
     
     // 빌드 출력 최적화
     output: 'standalone', // 독립 실행형 출력 모드

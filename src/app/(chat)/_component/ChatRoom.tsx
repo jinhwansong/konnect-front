@@ -56,7 +56,6 @@ interface IMessage {
 }
 export default function ChatRoom({ data }: { data: IData }) {
   const router = useRouter()
-  console.log(data)
   // 내정보
     const { data:mydata } = useUserData();
   const [roomButton, setRoomButton] = useState({

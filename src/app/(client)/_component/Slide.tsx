@@ -17,6 +17,7 @@ export default function Slide() {
         title2: '멘토와 아티클의 만남',
         sub: '아티클 확인하기 >',
         img: <IcMainSlide01 />,
+        link: '/article',
       },
       {
         id: 2,
@@ -24,8 +25,8 @@ export default function Slide() {
         title: '당신의 고민을 해결하는',
         title2: '해결의 마법사!',
         sub: '멘토 찾기 >',
-
         img: <IcMainSlide02 />,
+        link: '/mentors',
       },
     ];
   return (
@@ -49,7 +50,7 @@ export default function Slide() {
       >
         {mainSlide.map((swipers) => (
           <SwiperSlide key={swipers.id}>
-            <Link href="/" className={style.swiper}>
+            <Link href={swipers.link} className={style.swiper}>
               <div className={style.swiperImg}>{swipers.img}</div>
               <div className={style.swiperText}>
                 <span>{swipers.premier}</span>

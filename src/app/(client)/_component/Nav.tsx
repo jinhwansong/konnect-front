@@ -24,8 +24,8 @@ export default function Nav() {
     title: '프로필 관리',
     items: [
       { title: '내 정보', href: '/user/mypage' },
-      { title: '북마크', href: '/user/bookmarks' },
-      { title: '팔로우', href: '/user/relationships' },
+      // { title: '북마크', href: '/user/bookmarks' },
+      // { title: '팔로우', href: '/user/relationships' },
     ],
   };
 
@@ -36,8 +36,8 @@ export default function Nav() {
       { title: '멘토 정보', href: '/mentor/mentor_profile' },
       { title: '멘토링 관리', href: '/mentor/schedule' },
       { title: '멘토링 생성/관리', href: '/mentor/program' },
-      { title: '받은 리뷰 관리', href: '/mentor/reviews' },
-      { title: '작성한 게시글', href: '/mentor/posts' },
+      // { title: '받은 리뷰 관리', href: '/mentor/reviews' },
+      // { title: '작성한 게시글', href: '/mentor/posts' },
     ],
   };
 

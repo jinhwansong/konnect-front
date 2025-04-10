@@ -1,10 +1,8 @@
 'use client';
-import React from 'react';
-import { useFormState } from 'react-dom';
+import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import { onSubmit } from '@/app/_lib/useLogin';
 import Button from '@/app/_component/Button';
 import Input from '@/app/_component/Input';
 import Social from '@/app/(client)/_component/Social';
@@ -16,6 +14,7 @@ export default function Login() {
   const queryclient = useQueryClient();
   const [email, changeEmail] = useInput('');
   const [password, changePassword] = useInput('');
+  const [error, setError] = useState('')
   const input = [
     {
       type: 'text',
@@ -32,15 +31,39 @@ export default function Login() {
       placeholder: '비밀번호',
     },
   ];
-  const [state, formAction] = useFormState(onSubmit, { message: null });
-  if (state?.ok) {
-    queryclient.setQueryData(['mydata'], state.data);
-    router.replace('/');
-  }
+  
+  const onSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,
+        {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (data.code === 401) {
+        setError('아이디 또는 비밀번호가 일치하지 않습니다');
+      }
+      if (data) {
+        queryclient.setQueryData(['mydata'], data);
+        router.replace('/');
+      }
+    },
+    [email, password, queryclient, router]
+  );
   return (
     <article className={style.article}>
       <h4 className={style.title}>커넥트 시작하기</h4>
-      <form action={formAction} className={style.form}>
+      <form onSubmit={onSubmit} className={style.form}>
         {input.map((inputs, i) => (
           <Input
             type={inputs.type}
@@ -51,7 +74,7 @@ export default function Login() {
             key={i}
           />
         ))}
-        <p>{state?.message as string}</p>
+        <p>{error}</p>
 
         <Button type="submit">로그인</Button>
       </form>
