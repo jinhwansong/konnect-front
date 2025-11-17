@@ -4,12 +4,12 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
+import AdminRedirect from '@/components/common/AdminRedirect';
 import ArticleList from '@/components/main/ArticleList';
 import MentorContent from '@/components/main/MentorContent';
 import Slider from '@/components/main/Slider';
 import { fetchArticles } from '@/libs/article';
 import { fetchSessions } from '@/libs/main';
-import AdminRedirect from '@/components/common/AdminRedirect';
 
 export default async function Home() {
   const queryClient = new QueryClient();
