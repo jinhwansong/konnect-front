@@ -1,0 +1,98 @@
+/* Design Tokens - 중앙 집중식 디자인 시스템 */
+@import 'tailwindcss';
+
+:root {
+  --primary: #6366f1; /* 퍼플 */
+  --primary-sub01: #818aff;
+  --primary-sub02: #f4f5fa;
+  --primary-sub03: #2c3e50;
+  --primary-sub04: #6c9bcf;
+
+  --background: #ffffff;
+  --border-color: #eeeeee;
+  --hover-bg: #f4f5fa;
+  --card-bg: #fff;
+  --card-bg-sub: #f7f7f7;
+  --text: #333333;
+  --text-sub: #555555;
+  --text-bold: #222222;
+
+  /* 배경 & 텍스트 */
+  --editor-bg: #ffffff;
+  --editor-text: #2f2f2f;
+  --editor-text-sub: #6b7280; /* 회색톤 */
+  --editor-text-bold: #111111;
+
+  /* 코드 */
+  --editor-code-bg: #f6f8fa;
+  --editor-code-text: #d6336c;
+  --editor-code-block-bg: #f6f8fa;
+  --editor-code-block-text: #1f2937;
+  --editor-code-border: #e5e7eb;
+
+  /* 인용문 */
+  --editor-quote-border: #e5e7eb;
+  --editor-quote-bg: #fafafa;
+  --editor-quote-text: #4b5563;
+
+  /* 테이블 */
+  --editor-table-border: #e5e7eb;
+  --editor-table-header-bg: #f9fafb;
+
+  /* Semantic Colors */
+  --color-success: #16a34a;
+  --color-success-light: #22c55e;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 메인 포인트 */
+    --primary: #4f46e5; /* 딥 인디고 퍼플 */
+    --primary-sub01: #6366f1; /* 기본 퍼플 */
+    --primary-sub02: #18181b; /* 서브 배경 */
+    --primary-sub03: #818cf8; /* 살짝 밝은 퍼플 */
+    --primary-sub04: #3b82f6; /* 블루 포인트 */
+
+    /* 배경 & 보더 */
+    --background: #121212; /* 완전 블랙 대신 차콜 */
+    --border-color: #2a2a2a; /* 보더는 은은한 다크그레이 */
+    --hover-bg: #2a2d31;
+    /* 텍스트 */
+    --text: #d1d5db; /* 기본 텍스트 (라이트 그레이) */
+    --text-sub: #9ca3af; /* 서브 텍스트 */
+    --text-bold: #ffffff; /* 강조 텍스트 */
+    --card-bg: #1a1c1e;
+    --card-bg-sub: #1a1c1e;
+    /* 에디터 */
+    --editor-bg: #1a1c1e; /* 진한 차콜 */
+    --editor-text: #e5e7eb;
+    --editor-text-sub: #9ca3af;
+    --editor-text-bold: #ffffff;
+
+    /* 코드 */
+    --editor-code-bg: #1e1e22;
+    --editor-code-text: #f87171;
+    --editor-code-block-bg: #1e1e22;
+    --editor-code-block-text: #d1d5db;
+    --editor-code-border: #2f2f2f;
+
+    /* 인용문 */
+    --editor-quote-border: #32363f;
+    --editor-quote-bg: #1c1e24;
+    --editor-quote-text: #9ca3af;
+
+    /* 테이블 */
+    --editor-table-border: #2f2f2f;
+    --editor-table-header-bg: #1e222a;
+
+    /* Semantic Colors */
+    --color-success: #16a34a;
+    --color-success-light: #22c55e;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+    --color-info: #3b82f6;
+  }
+}

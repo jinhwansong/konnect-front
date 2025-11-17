@@ -1,0 +1,147 @@
+.ProseMirror {
+  color: var(--editor-text);
+  font-family: 'Pretendard', sans-serif;
+  line-height: 1.8;
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+/* 에디터 전용 */
+.ProseMirror.editor {
+  background-color: var(--editor-bg);
+  outline: none;
+  margin: 0 auto;
+}
+
+/* 뷰어 전용 */
+.ProseMirror.viewer {
+  background-color: transparent;
+}
+/* 문단 */
+.ProseMirror p {
+  margin: 0.75rem 0;
+}
+
+/* 제목 */
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+}
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.75rem;
+}
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* 강조 */
+.ProseMirror strong {
+  font-weight: 600;
+  color: var(--editor-text-bold);
+}
+.ProseMirror em {
+  font-style: italic;
+  color: var(--editor-text-sub);
+}
+.ProseMirror s {
+  text-decoration: line-through;
+  color: var(--editor-text-sub);
+}
+
+/* 인라인 코드 */
+.ProseMirror code {
+  background: var(--editor-code-bg);
+  color: var(--editor-code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* 코드 블럭 */
+.ProseMirror pre {
+  background: var(--editor-code-block-bg);
+  color: var(--editor-code-block-text);
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--editor-code-border);
+}
+.ProseMirror pre code {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-size: 0.9em;
+  background: transparent;
+  line-height: 1.6;
+}
+
+/* 인용문 */
+.ProseMirror blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--editor-quote-border);
+  color: var(--editor-quote-text);
+  background: var(--editor-quote-bg);
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+/* 리스트 */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.ProseMirror ul {
+  list-style-type: disc; /* ● 기본 불릿 */
+}
+
+.ProseMirror ol {
+  list-style-type: decimal; /* 1. 2. 3. */
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+}
+
+/* 구분선 */
+.ProseMirror hr {
+  border: none;
+  border-top: 1px solid var(--editor-table-border);
+  margin: 2rem 0;
+  opacity: 0.7;
+}
+
+/* 이미지 */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+/* 테이블 */
+.ProseMirror table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+.ProseMirror th,
+.ProseMirror td {
+  border: 1px solid var(--editor-table-border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.ProseMirror th {
+  background: var(--editor-table-header-bg);
+  font-weight: 600;
+  color: var(--editor-text-bold);
+}
