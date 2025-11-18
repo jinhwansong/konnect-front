@@ -90,6 +90,7 @@ export function buildImageUrl(
   url?: string,
   fallback = '/icon/IcPeople.avif'
 ): string {
+  
   if (!url) return fallback;
   if (url.startsWith('http')) return url;
   return `${process.env.NEXT_PUBLIC_AUTH_URL}/${url}`;

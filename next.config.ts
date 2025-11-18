@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         hostname: 'k.kakaocdn.net', // 카카오
       },
       {
+        protocol: 'https',
+        hostname: 'konee.shop', // 실서버
+      },
+      {
         protocol: 'http',
         hostname: 'k.kakaocdn.net', // 카카오
       },
