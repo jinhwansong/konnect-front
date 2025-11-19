@@ -1,5 +1,4 @@
 'use client';
-import { format } from 'date-fns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -15,6 +14,7 @@ import {
 } from '@/hooks/query/useArticle';
 import { useToastStore } from '@/stores/useToast';
 import { findOptionLabel } from '@/utils/getLabel';
+import { buildImageUrl, formatDate } from '@/utils/helpers';
 
 import CommentSection from '../comment/CommentSection';
 import Button from '../common/Button';
@@ -68,7 +68,9 @@ export default function ArticleDetail({ articleId }: { articleId: string }) {
         <div className="flex flex-wrap items-center gap-3 text-sm">
           <div className="flex items-center gap-2">
             <Image
-              src={article?.author.image ?? '/icon/IcPeople.avif'}
+              src={
+                buildImageUrl(article?.author.image)
+              }
               width={28}
               height={28}
               alt="작성자"
@@ -84,8 +86,7 @@ export default function ArticleDetail({ articleId }: { articleId: string }) {
             </span>
           </span>
           <span className="text-[var(--text-sub)]">
-            {article?.createdAt &&
-              format(new Date(article?.createdAt), 'yyyy.MM.dd')}
+            {formatDate(article?.createdAt as string)}
           </span>
         </div>
 
