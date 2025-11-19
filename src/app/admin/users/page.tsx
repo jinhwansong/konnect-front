@@ -1,6 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
 import AdminShell from '@/components/common/AdminShell';
 import AdminToolbar from '@/components/common/AdminToolbar';
@@ -11,11 +11,10 @@ import EmptyState from '@/components/common/EmptyState';
 import Modal from '@/components/common/Modal';
 import PageHeader from '@/components/common/PageHeader';
 import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
 import { useAdminUsers, useUpdateUserStatus } from '@/hooks/query/useAdmin';
 import type { AdminUserRow, UserRole, UserStatus } from '@/types/admin';
+import { formatDate } from '@/utils/helpers';
 
-const LIMIT_OPTIONS = [10, 20, 30] as const;
 const ROLE_FILTERS: Array<{ label: string; value: 'all' | UserRole }> = [
   { label: '전체', value: 'all' },
   { label: '멘티', value: 'mentee' },
@@ -61,16 +60,11 @@ function AdminUsersPageInner() {
   const status = (searchParams.get('status') ?? 'all') as 'all' | UserStatus;
   const sortParam = searchParams.get('sort') ?? 'createdAt:desc';
 
-  const [searchTerm, setSearchTerm] = useState(q);
   const [selectedUser, setSelectedUser] = useState<AdminUserRow | null>(null);
   const [actionTarget, setActionTarget] = useState<{
     type: UserActionType;
     user: AdminUserRow;
   } | null>(null);
-
-  useEffect(() => {
-    setSearchTerm(q);
-  }, [q]);
 
   const columns = useMemo(
     () => [
@@ -112,22 +106,8 @@ function AdminUsersPageInner() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setParams({ q: searchTerm || null, page: 1 });
-  };
-
   const handleFilterChange = (key: 'role' | 'status', value: string) => {
     setParams({ [key]: value, page: 1 });
-  };
-
-  const handleLimitChange = (value: number) => {
-    setParams({ limit: value, page: 1 });
-  };
-
-  const handleSort = (key: string, direction: 'asc' | 'desc' | 'none') => {
-    const nextSort = direction === 'none' ? null : `${key}:${direction}`;
-    setParams({ sort: nextSort, page: 1 });
   };
 
   const handleRowAction = (type: UserActionType, user: AdminUserRow) => {
@@ -142,24 +122,6 @@ function AdminUsersPageInner() {
       />
 
       <AdminToolbar
-        search={
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex items-center gap-3"
-          >
-            <div className="flex-1">
-              <SearchInput
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="ID, 이름, 이메일 검색"
-                label="사용자 검색"
-              />
-            </div>
-            <Button type="submit" variant="primary" size="sm">
-              검색
-            </Button>
-          </form>
-        }
         filters={
           <div className="flex flex-col gap-3 md:flex-row md:items-center">
             <FilterGroup
@@ -174,42 +136,6 @@ function AdminUsersPageInner() {
               options={STATUS_FILTERS}
               onChange={value => handleFilterChange('status', value)}
             />
-          </div>
-        }
-        actions={
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 rounded-full border border-[var(--border-color)] px-3 py-1.5 text-xs text-[var(--text-sub)]">
-              페이지당
-              <select
-                value={limit}
-                onChange={event =>
-                  handleLimitChange(Number(event.target.value))
-                }
-                className="rounded-md border border-[var(--border-color)] bg-transparent px-2 py-1 text-xs text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:outline-none"
-              >
-                {LIMIT_OPTIONS.map(option => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                setParams({
-                  q: null,
-                  role: 'all',
-                  status: 'all',
-                  page: 1,
-                  sort: 'createdAt:desc',
-                })
-              }
-            >
-              필터 초기화
-            </Button>
           </div>
         }
       />
@@ -233,7 +159,6 @@ function AdminUsersPageInner() {
               key: sortParam.split(':')[0],
               direction: (sortParam.split(':')[1] as 'asc' | 'desc') ?? 'none',
             }}
-            onSort={handleSort}
             renderRow={row => (
               <>
                 <td className="px-6 py-4 text-xs font-medium text-[var(--text-sub)]">
@@ -249,7 +174,7 @@ function AdminUsersPageInner() {
                   {row.role}
                 </td>
                 <td className="px-6 py-4 text-sm text-[var(--text-sub)]">
-                  {row.createdAt}
+                  {formatDate(row.createdAt)}
                 </td>
                 <td className="px-6 py-4 text-sm">
                   <StatusBadge status={row.status} />
@@ -383,10 +308,10 @@ function FilterGroup<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <fieldset>
-      <legend className="mb-2 text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+    <div className="mr-5 flex items-center gap-4">
+      <em className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
         {label}
-      </legend>
+      </em>
       <div className="flex flex-wrap gap-2">
         {options.map(option => {
           const isActive = value === option.value;
@@ -406,7 +331,7 @@ function FilterGroup<T extends string>({
           );
         })}
       </div>
-    </fieldset>
+    </div>
   );
 }
 

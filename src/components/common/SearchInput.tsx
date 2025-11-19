@@ -23,7 +23,7 @@ export default function SearchInput({
   };
 
   return (
-    <label className="flex w-full items-center gap-3 rounded-full border border-[var(--border-color)] bg-[var(--background)] px-4 py-2 shadow-sm transition focus-within:border-[var(--primary)] focus-within:shadow-md focus-within:ring-2 focus-within:ring-[var(--primary)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--background)]">
+    <label className="flex w-full items-center gap-3 rounded-md border border-[var(--border-color)] bg-[var(--background)] px-4 py-2 shadow-sm transition  ">
       <FiSearch className="text-[var(--text-sub)]" aria-hidden="true" />
       {label && (
         <span className="sr-only" id={`${name}-label`}>

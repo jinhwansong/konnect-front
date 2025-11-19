@@ -1,6 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import AdminShell from '@/components/common/AdminShell';
@@ -11,7 +11,6 @@ import DataTable from '@/components/common/DataTable';
 import EmptyState from '@/components/common/EmptyState';
 import PageHeader from '@/components/common/PageHeader';
 import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
 import { Toggle } from '@/components/common/Toggle';
 import {
   useAdminNotices,
@@ -62,7 +61,6 @@ function NoticesAdminPageInner() {
   const published = searchParams.get('published') ?? 'all';
   const sort = searchParams.get('sort') ?? 'createdAt:desc';
 
-  const [searchTerm, setSearchTerm] = useState(q);
   const [editingNotice, setEditingNotice] = useState<AdminNoticeRow | null>(
     null
   );
@@ -81,10 +79,6 @@ function NoticesAdminPageInner() {
       published: true,
     },
   });
-
-  useEffect(() => {
-    setSearchTerm(q);
-  }, [q]);
 
   const noticesQuery = useAdminNotices({
     page,
@@ -106,11 +100,6 @@ function NoticesAdminPageInner() {
       }
     });
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
-
-  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setParams({ q: searchTerm || null, page: 1 });
   };
 
   const createMutation = useCreateNotice();
@@ -150,44 +139,11 @@ function NoticesAdminPageInner() {
       />
 
       <AdminToolbar
-        search={
-          <form onSubmit={handleSearch} className="flex items-center gap-3">
-            <div className="flex-1">
-              <SearchInput
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="제목, 내용 검색"
-                label="공지 검색"
-              />
-            </div>
-            <Button type="submit" size="sm">
-              검색
-            </Button>
-          </form>
-        }
         filters={
           <FilterBar
             value={published}
             onChange={value => setParams({ published: value, page: 1 })}
           />
-        }
-        actions={
-          <div className="flex items-center gap-2 text-xs text-[var(--text-sub)]">
-            페이지당
-            <select
-              value={limit}
-              onChange={event =>
-                setParams({ limit: Number(event.target.value), page: 1 })
-              }
-              className="rounded-md border border-[var(--border-color)] px-2 py-1 text-xs"
-            >
-              {[10, 20, 30].map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
         }
       />
 
@@ -430,7 +386,7 @@ function FilterBar({
 }) {
   return (
     <fieldset className="space-y-2">
-      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
         공개 상태
       </legend>
       <div className="flex flex-wrap gap-2">

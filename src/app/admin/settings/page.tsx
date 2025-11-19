@@ -195,7 +195,7 @@ export default function SettingsAdminPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-6">
               <div>
-                <p className="text-xs tracking-wide text-[var(--text-sub)] uppercase">
+                <p className="text-xs tracking-wide text-[var(--text-sub)]">
                   전체 관리자
                 </p>
                 <p className="mt-2 text-2xl font-semibold text-[var(--text-bold)]">
@@ -203,7 +203,7 @@ export default function SettingsAdminPage() {
                 </p>
               </div>
               <div>
-                <p className="text-xs tracking-wide text-[var(--text-sub)] uppercase">
+                <p className="text-xs tracking-wide text-[var(--text-sub)]">
                   슈퍼 관리자
                 </p>
                 <p className="mt-2 text-2xl font-semibold text-[var(--text-bold)]">

@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
 import AdminShell from '@/components/common/AdminShell';
 import AdminToolbar from '@/components/common/AdminToolbar';
@@ -12,7 +12,6 @@ import DataTable from '@/components/common/DataTable';
 import EmptyState from '@/components/common/EmptyState';
 import PageHeader from '@/components/common/PageHeader';
 import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
 import { useAdminArticles, useAdminReviews } from '@/hooks/query/useAdmin';
 import type { AdminArticleRow, AdminReviewRow } from '@/types/admin';
 
@@ -73,13 +72,8 @@ function ContentsAdminPageInner() {
   const reviewLimit = Number(searchParams.get('reviewLimit') ?? '10');
   const reviewSort = searchParams.get('reviewSort') ?? 'createdAt:desc';
 
-  const [searchTerm, setSearchTerm] = useState(q);
   const [articleAction, setArticleAction] = useState<ArticleAction>(null);
   const [reviewAction, setReviewAction] = useState<ReviewAction>(null);
-
-  useEffect(() => {
-    setSearchTerm(q);
-  }, [q]);
 
   const articleColumns = useMemo(
     () => [
@@ -174,15 +168,6 @@ function ContentsAdminPageInner() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setParams({
-      q: searchTerm || null,
-      articlePage: 1,
-      reviewPage: 1,
-    });
-  };
-
   return (
     <AdminShell title="콘텐츠">
       <PageHeader
@@ -191,21 +176,6 @@ function ContentsAdminPageInner() {
       />
 
       <AdminToolbar
-        search={
-          <form onSubmit={handleSearch} className="flex items-center gap-3">
-            <div className="flex-1">
-              <SearchInput
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="아티클 제목, 작성자, 세션명 검색"
-                label="콘텐츠 검색"
-              />
-            </div>
-            <Button type="submit" size="sm">
-              검색
-            </Button>
-          </form>
-        }
         filters={
           <div className="grid gap-4 md:grid-cols-2">
             <FilterButtons
@@ -543,7 +513,7 @@ function FilterButtons<T extends string>({
 }) {
   return (
     <fieldset className="space-y-2">
-      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
         {legend}
       </legend>
       <div className="flex flex-wrap gap-2">

@@ -27,7 +27,7 @@ export default function MentorContent({
       <h4 className="mb-7 text-2xl font-bold text-[var(--text-bold)]">
         멘토 찾기
       </h4>
-      <div className="mb-5 flex w-full items-center justify-between">
+      <div className="mb-5 flex  items-center justify-between">
         <Select
           value={selected}
           onChange={setSelected}

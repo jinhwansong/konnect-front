@@ -23,6 +23,8 @@ interface DataTableProps<T> {
   onSort?: (key: Column<T>['key'], direction: SortDirection) => void;
   sortState?: { key: Column<T>['key']; direction: SortDirection };
   getRowKey?: (item: T, index: number) => string;
+  headerPaddingClassName?: string;
+  cellPaddingClassName?: string;
 }
 
 export default function DataTable<T extends object>({
@@ -36,6 +38,8 @@ export default function DataTable<T extends object>({
   onSort,
   sortState,
   getRowKey,
+  headerPaddingClassName = 'px-6 py-4',
+  cellPaddingClassName = 'px-6 py-4',
 }: DataTableProps<T>) {
   const handleSort = (column: Column<T>) => {
     if (!column.sortable || !onSort) return;
@@ -61,7 +65,10 @@ export default function DataTable<T extends object>({
               className="animate-pulse border-b border-[var(--border-color)]"
             >
               {columns.map(column => (
-                <td key={String(column.key)} className="px-6 py-4">
+                <td
+                  key={String(column.key)}
+                  className={cellPaddingClassName}
+                >
                   <div className="h-4 w-24 rounded bg-[var(--background-sub)]" />
                 </td>
               ))}
@@ -77,7 +84,7 @@ export default function DataTable<T extends object>({
           <tr>
             <td
               colSpan={columns.length}
-              className="px-6 py-10 text-center text-sm text-[var(--color-danger)]"
+              className={`${cellPaddingClassName} text-center text-sm text-[var(--color-danger)]`}
             >
               {errorMessage}
             </td>
@@ -92,7 +99,7 @@ export default function DataTable<T extends object>({
           <tr>
             <td
               colSpan={columns.length}
-              className="px-6 py-10 text-center text-sm text-[var(--text-sub)]"
+              className={`${cellPaddingClassName} text-center text-sm text-[var(--text-sub)]`}
             >
               {emptyMessage}
             </td>
@@ -113,7 +120,7 @@ export default function DataTable<T extends object>({
               : columns.map(column => (
                   <td
                     key={String(column.key)}
-                    className={`px-6 py-4 text-sm text-[var(--text)] ${getAlignmentClasses(column.align)}`}
+                    className={`${cellPaddingClassName} text-sm text-[var(--text)] ${getAlignmentClasses(column.align)}`}
                   >
                     {String(item[column.key as keyof T] ?? '—')}
                   </td>
@@ -140,7 +147,7 @@ export default function DataTable<T extends object>({
                     key={String(column.key)}
                     scope="col"
                     style={column.width ? { width: column.width } : undefined}
-                    className={`px-6 py-4 text-left text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase ${getAlignmentClasses(column.align)}`}
+                    className={`${headerPaddingClassName} text-left text-xs font-semibold tracking-wide text-[var(--text-sub)] ${getAlignmentClasses(column.align)}`}
                     aria-sort={
                       column.sortable
                         ? direction === 'none'
@@ -154,7 +161,7 @@ export default function DataTable<T extends object>({
                     <button
                       type="button"
                       onClick={() => handleSort(column)}
-                      className={`flex items-center gap-2 text-xs font-semibold text-[var(--text-sub)] transition hover:text-[var(--text-bold)] focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] focus-visible:outline-none ${column.sortable ? '' : 'cursor-default'}`}
+                      className={`flex items-center gap-2 text-xs font-semibold text-[var(--text-sub)] transition hover:text-[var(--text-bold)] ${column.sortable ? '' : 'cursor-default'}`}
                       aria-label={
                         column.sortable ? `${column.label} 정렬` : undefined
                       }

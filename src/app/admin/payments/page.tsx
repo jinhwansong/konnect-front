@@ -1,7 +1,7 @@
 'use client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
 import AdminShell from '@/components/common/AdminShell';
 import AdminToolbar from '@/components/common/AdminToolbar';
@@ -11,7 +11,6 @@ import DataTable from '@/components/common/DataTable';
 import EmptyState from '@/components/common/EmptyState';
 import PageHeader from '@/components/common/PageHeader';
 import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
 import { useAdminPayments } from '@/hooks/query/useAdmin';
 import type { AdminPaymentRow, PaymentStatus } from '@/types/admin';
 
@@ -54,14 +53,9 @@ function PaymentsAdminPageInner() {
   const dateFrom = searchParams.get('dateFrom') ?? '';
   const dateTo = searchParams.get('dateTo') ?? '';
 
-  const [searchTerm, setSearchTerm] = useState(q);
   const [refundTarget, setRefundTarget] = useState<AdminPaymentRow | null>(
     null
   );
-
-  useEffect(() => {
-    setSearchTerm(q);
-  }, [q]);
 
   const columns = useMemo(
     () => [
@@ -109,11 +103,6 @@ function PaymentsAdminPageInner() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setParams({ q: searchTerm || null, page: 1 });
-  };
-
   const handleSort = (key: string, direction: 'asc' | 'desc' | 'none') => {
     setParams({
       sort: direction === 'none' ? null : `${key}:${direction}`,
@@ -129,24 +118,6 @@ function PaymentsAdminPageInner() {
       />
 
       <AdminToolbar
-        search={
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex items-center gap-3"
-          >
-            <div className="flex-1">
-              <SearchInput
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="주문번호, 사용자 이름 검색"
-                label="결제 검색"
-              />
-            </div>
-            <Button type="submit" size="sm">
-              검색
-            </Button>
-          </form>
-        }
         filters={
           <div className="grid gap-4 md:grid-cols-2">
             <FilterGroup
@@ -156,7 +127,7 @@ function PaymentsAdminPageInner() {
               onChange={value => setParams({ status: value, page: 1 })}
             />
             <div className="space-y-2">
-              <span className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+              <span className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
                 기간
               </span>
               <div className="flex flex-wrap items-center gap-2">
@@ -179,25 +150,6 @@ function PaymentsAdminPageInner() {
                 />
               </div>
             </div>
-          </div>
-        }
-        actions={
-          <div className="flex items-center gap-2 text-xs text-[var(--text-sub)]">
-            페이지당
-            <select
-              value={limit}
-              onChange={event =>
-                setParams({ limit: Number(event.target.value), page: 1 })
-              }
-              className="rounded-md border border-[var(--border-color)] px-2 py-1 text-xs"
-              aria-label="페이지당 개수"
-            >
-              {[10, 20, 30].map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
           </div>
         }
       />
@@ -295,7 +247,7 @@ function FilterGroup<T extends string>({
 }) {
   return (
     <fieldset className="space-y-2">
-      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
         {legend}
       </legend>
       <div className="flex flex-wrap gap-2">

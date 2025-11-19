@@ -22,6 +22,7 @@ import type {
   DashboardRecentPayment,
   DashboardRecentApplication,
 } from '@/types/admin';
+import { formatCurrency, formatDate } from '@/utils/helpers';
 
 export default function AdminDashboardPage() {
   const { data, isLoading, isError, error } = useAdminDashboard();
@@ -45,6 +46,12 @@ export default function AdminDashboardPage() {
     { key: 'status', label: '상태', sortable: false },
   ];
 
+  const careerLevels = [
+    { label: '주니어 (1~3년)', value: 'junior' },
+    { label: '미들 (4~8년)', value: 'middle' },
+    { label: '시니어 (9년 이상)', value: 'senior' },
+    { label: 'Lead 레벨', value: 'lead' },
+  ];
   return (
     <AdminShell title="대시보드">
       <PageHeader
@@ -130,10 +137,14 @@ export default function AdminDashboardPage() {
                       {row.applicantName}
                     </td>
                     <td className="px-6 py-3 text-sm text-[var(--text)]">
-                      {row.careerYears}년
+                      {
+                        careerLevels.find(
+                          level => level.value === row.careerYears
+                        )?.label
+                      }
                     </td>
                     <td className="px-6 py-3 text-sm text-[var(--text-sub)]">
-                      {row.submittedAt}
+                      {formatDate(row.submittedAt)}
                     </td>
                     <td className="px-6 py-3 text-sm">
                       <StatusPill status={row.status} />
@@ -169,7 +180,7 @@ export default function AdminDashboardPage() {
                     {row.userName}
                   </td>
                   <td className="px-6 py-3 text-right text-sm font-semibold text-[var(--text-bold)]">
-                    ₩{row.amount.toLocaleString()}
+                    {formatCurrency(row.amount)}
                   </td>
                   <td className="px-6 py-3 text-sm">
                     <StatusPill status={row.status} />

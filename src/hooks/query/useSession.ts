@@ -49,8 +49,11 @@ export const useTogglePublic = () => {
       updateSessionVisibility(id, isPublic),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session-detail'] });
-      queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.invalidateQueries({
+        queryKey: ['session-detail'],
+        exact: false,
+      });
+      queryClient.invalidateQueries({ queryKey: ['session'], exact: false });
     },
   });
 };
@@ -60,7 +63,7 @@ export const useDeleteSession = () => {
   return useMutation({
     mutationFn: ({ id }: { id: string }) => removeSession(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.invalidateQueries({ queryKey: ['session'], exact: false });
     },
   });
 };
@@ -70,7 +73,7 @@ export const useCreateSession = () => {
   return useMutation({
     mutationFn: (data: SessionRequest) => createSession(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.invalidateQueries({ queryKey: ['session'], exact: false });
     },
   });
 };
@@ -80,8 +83,10 @@ export const usePatchSession = () => {
   return useMutation({
     mutationFn: ({ id, data }: PatchSession) => updateSession(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session-detail'] });
-      queryClient.invalidateQueries({ queryKey: ['session'] });
+      queryClient.invalidateQueries({
+        queryKey: ['session-detail'], exact: false
+      });
+      queryClient.invalidateQueries({ queryKey: ['session'], exact: false });
     },
   });
 };

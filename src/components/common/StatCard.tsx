@@ -24,7 +24,7 @@ export default function StatCard({
 
   return (
     <article className="rounded-[var(--radius-lg,1rem)] border border-[var(--border-color)] bg-[var(--card-bg)] p-6 shadow-sm transition duration-200 hover:shadow-md">
-      <p className="text-xs font-medium tracking-wide text-[var(--text-sub)] uppercase">
+      <p className="text-xs font-medium tracking-wide text-[var(--text-sub)]">
         {title}
       </p>
       <p className="mt-3 text-2xl font-semibold text-[var(--text-bold)]">

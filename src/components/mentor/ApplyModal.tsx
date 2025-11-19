@@ -40,9 +40,10 @@ export default function ApplyModal() {
     register,
     control,
     handleSubmit,
+    watch,
     formState: { isValid, errors },
   } = methods;
-
+  console.log(watch('introduce').length);
   const onSubmit = (data: ApplyRequest) => {
     applyMentor(data, {
       onSuccess: () => {
@@ -158,7 +159,7 @@ export default function ApplyModal() {
             <Textarea
               {...register('introduce')}
               placeholder="자기소개를 입력해주세요."
-              maxLength={100}
+              maxLength={500}
             />
           </FormFieldWrapper>
 

@@ -2,7 +2,9 @@
 export const defaultQueryOptions = {
   retry: false,
   staleTime: 1000 * 60 * 5,
-  refetchOnMount: false,
+  refetchOnMount: 'always',
+  refetchOnReconnect: 'always',
+  refetchOnWindowFocus: 'always',
 } as const;
 
 export function withQueryDefaults<

@@ -15,11 +15,13 @@ import {
   GetPaymentsParams,
   GetReviewsParams,
   GetUsersParams,
+  MentorApplicationDetail,
   MentorApplicationRow,
   MentoringSessionRow,
   PaginatedResponse,
   ReservationRow,
   ToggleSessionPublicParams,
+  UpdateMentorApplicationStatusParams,
   UpdateNoticeParams,
   UpdateReservationStatusParams,
   UpdateUserStatusParams,
@@ -112,13 +114,11 @@ export const getMentorApplications = async (
     limit = 10,
     q = '',
     status = 'all',
-    sort = 'createdAt:desc',
   } = params;
 
   const queryParams = new URLSearchParams({
     page: String(page),
     limit: String(limit),
-    sort,
   });
 
   if (q) queryParams.append('q', q);
@@ -144,7 +144,8 @@ export const getMentorApplications = async (
     data: response.data.map(item => ({
       id: item.id,
       applicantName: item.name,
-      careerYears: 0, // TODO: career 정보 추가 필요
+      email: item.email,
+      expertise: item.expertise,
       submittedAt: item.createdAt,
       status: item.status,
     })),
@@ -153,9 +154,32 @@ export const getMentorApplications = async (
       limit: Number(limit),
       totalCount: response.total,
       totalPages: response.totalPage,
-      sort,
     },
   };
+};
+
+export const getMentorApplicationDetail = async (id: string) => {
+  return fetcher<MentorApplicationDetail>(`admin/mentors/${id}`, {
+    method: 'GET',
+  });
+};
+
+export const updateMentorApplicationStatus = async ({
+  id,
+  status,
+  reason,
+}: UpdateMentorApplicationStatusParams) => {
+  return fetcher<{ message: string }>(`admin/mentors/${id}/approve`, {
+    method: 'POST',
+    body: JSON.stringify(
+      status === 'rejected'
+        ? {
+            status,
+            reason,
+          }
+        : { status }
+    ),
+  });
 };
 
 // 아티클 관리

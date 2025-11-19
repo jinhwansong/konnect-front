@@ -1,6 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent, Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
 import AdminShell from '@/components/common/AdminShell';
 import AdminToolbar from '@/components/common/AdminToolbar';
@@ -10,7 +10,6 @@ import DataTable from '@/components/common/DataTable';
 import EmptyState from '@/components/common/EmptyState';
 import PageHeader from '@/components/common/PageHeader';
 import Pagination from '@/components/common/Pagination';
-import SearchInput from '@/components/common/SearchInput';
 import {
   useMentoringReservations,
   useMentoringSessions,
@@ -64,8 +63,6 @@ function MentoringAdminPageInner() {
   const q = searchParams.get('q') ?? '';
   const sessionStatus = searchParams.get('sessionStatus') ?? 'all';
   const reservationStatus = searchParams.get('reservationStatus') ?? 'all';
-  const dateFrom = searchParams.get('dateFrom') ?? '';
-  const dateTo = searchParams.get('dateTo') ?? '';
 
   const sessionPage = Number(searchParams.get('sessionPage') ?? '1');
   const sessionLimit = Number(searchParams.get('sessionLimit') ?? '10');
@@ -75,14 +72,9 @@ function MentoringAdminPageInner() {
   const reservationLimit = Number(searchParams.get('reservationLimit') ?? '10');
   const reservationSort = searchParams.get('reservationSort') ?? 'time:desc';
 
-  const [searchTerm, setSearchTerm] = useState(q);
   const [sessionAction, setSessionAction] = useState<SessionAction>(null);
   const [reservationAction, setReservationAction] =
     useState<ReservationAction>(null);
-
-  useEffect(() => {
-    setSearchTerm(q);
-  }, [q]);
 
   const sessionColumns = useMemo(
     () => [
@@ -154,15 +146,6 @@ function MentoringAdminPageInner() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setParams({ q: searchTerm || null, sessionPage: 1, reservationPage: 1 });
-  };
-
-  const handleDateChange = (key: 'dateFrom' | 'dateTo', value: string) => {
-    setParams({ [key]: value, sessionPage: 1, reservationPage: 1 });
-  };
-
   return (
     <AdminShell title="멘토링">
       <PageHeader
@@ -171,26 +154,8 @@ function MentoringAdminPageInner() {
       />
 
       <AdminToolbar
-        search={
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex items-center gap-3"
-          >
-            <div className="flex-1">
-              <SearchInput
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="세션, 멘토, 멘티 검색"
-                label="멘토링 검색"
-              />
-            </div>
-            <Button type="submit" size="sm">
-              검색
-            </Button>
-          </form>
-        }
         filters={
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="flex">
             <FilterGroup
               legend="세션 상태"
               value={sessionStatus}
@@ -207,30 +172,6 @@ function MentoringAdminPageInner() {
                 setParams({ reservationStatus: value, reservationPage: 1 })
               }
             />
-            <div className="space-y-2">
-              <span className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
-                기간 필터
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                <input
-                  type="date"
-                  value={dateFrom}
-                  onChange={event =>
-                    handleDateChange('dateFrom', event.target.value)
-                  }
-                  className="rounded-md border border-[var(--border-color)] px-3 py-2 text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:outline-none"
-                />
-                <span className="text-sm text-[var(--text-sub)]">~</span>
-                <input
-                  type="date"
-                  value={dateTo}
-                  onChange={event =>
-                    handleDateChange('dateTo', event.target.value)
-                  }
-                  className="rounded-md border border-[var(--border-color)] px-3 py-2 text-sm text-[var(--text)] focus:ring-2 focus:ring-[var(--primary)] focus:outline-none"
-                />
-              </div>
-            </div>
           </div>
         }
       />
@@ -545,10 +486,10 @@ function FilterGroup<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <fieldset className="space-y-2">
-      <legend className="text-xs font-semibold tracking-wide text-[var(--text-sub)] uppercase">
+    <div className="mr-5 flex items-center gap-4">
+      <em className="text-xs font-semibold tracking-wide text-[var(--text-sub)]">
         {legend}
-      </legend>
+      </em>
       <div className="flex flex-wrap gap-2">
         {options.map(option => {
           const isActive = option.value === value;
@@ -568,7 +509,7 @@ function FilterGroup<T extends string>({
           );
         })}
       </div>
-    </fieldset>
+    </div>
   );
 }
 

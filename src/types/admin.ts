@@ -45,7 +45,7 @@ export interface DashboardRecentPayment extends Record<string, unknown> {
 export interface DashboardRecentApplication extends Record<string, unknown> {
   id: string;
   applicantName: string;
-  careerYears: number;
+  careerYears: string;
   submittedAt: string;
   status: 'pending' | 'approved' | 'rejected';
 }
@@ -102,14 +102,36 @@ export type ApplicationStatus = 'pending' | 'approved' | 'rejected';
 export interface MentorApplicationRow {
   id: string;
   applicantName: string;
-  careerYears: number;
-  portfolioUrl?: string;
+  email: string;
+  expertise: string;
   submittedAt: string;
   status: ApplicationStatus;
 }
 
 export interface GetMentorApplicationsParams extends PageParams {
   status?: string;
+}
+
+export interface MentorApplicationDetail {
+  id: string;
+  applicantName: string;
+  email: string;
+  phone?: string | null;
+  status: ApplicationStatus;
+  expertise: string;
+  company?: string | null;
+  position?: string | null;
+  career?: string | null;
+  introduce?: string | null;
+  portfolio?: string | null;
+  image?: string | null;
+  createdAt: string;
+}
+
+export interface UpdateMentorApplicationStatusParams {
+  id: string;
+  status: ApplicationStatus;
+  reason?: string;
 }
 
 // 아티클 타입

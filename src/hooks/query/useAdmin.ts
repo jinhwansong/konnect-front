@@ -9,10 +9,12 @@ import {
   getAdminPayments,
   getAdminReviews,
   getAdminUsers,
+  getMentorApplicationDetail,
   getMentorApplications,
   getMentoringReservations,
   getMentoringSessions,
   toggleSessionPublic,
+  updateMentorApplicationStatus,
   updateNotice,
   updateReservationStatus,
   updateUserStatus,
@@ -28,6 +30,7 @@ import {
   GetReviewsParams,
   GetUsersParams,
   ToggleSessionPublicParams,
+  UpdateMentorApplicationStatusParams,
   UpdateNoticeParams,
   UpdateReservationStatusParams,
   UpdateUserStatusParams,
@@ -78,6 +81,32 @@ export function useMentorApplications(params: GetMentorApplicationsParams) {
     queryKey: ['admin', 'mentorApplications', params],
     queryFn: () => getMentorApplications(params),
     staleTime: 30 * 1000, // 30초
+  });
+}
+
+export function useMentorApplicationDetail(id: string | null) {
+  return useQuery({
+    queryKey: ['admin', 'mentorApplications', 'detail', id],
+    queryFn: () => getMentorApplicationDetail(id as string),
+    enabled: Boolean(id),
+    staleTime: 30 * 1000,
+  });
+}
+
+export function useUpdateMentorApplicationStatus() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (params: UpdateMentorApplicationStatusParams) =>
+      updateMentorApplicationStatus(params),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['admin', 'mentorApplications'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['admin', 'mentorApplications', 'detail'],
+      });
+    },
   });
 }
 

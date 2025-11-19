@@ -45,7 +45,7 @@ function SelectComponent<T extends string>(
   };
 
   return (
-    <div className="w-full" ref={selectRef}>
+    <div  ref={selectRef}>
       {label && (
         <label
           htmlFor={selectId}
